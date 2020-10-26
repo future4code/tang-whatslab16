@@ -9,16 +9,31 @@ const DivPai = styled.div`
 const DivPrincipal = styled.div`
   background-color: lightgrey;
   display: flex;
-  flex-direction: column-column-reverse;
-  align-items: flex-end;
+  flex-direction: column-reverse;
   width: 40%;
   height: 90vh;
   border-radius: 5px;
   `
+const DivInputs = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+`
 const DivMensagens = styled.div`
   display: flex;
   justify-content: flex-end;
-  flex-direction: column;
+  flex-direction: column-reverse;
+  padding-left: 10px;
+  padding-right: 8px;
+`
+const DivUser = styled.div`
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-weight: bold;
+`
+const DivMsg = styled.div`
+  padding-top: 5px;
+  padding-bottom: 5px;
 `
 const InputUsuario = styled.input`
   width: 20%;
@@ -72,20 +87,24 @@ onChangeInputMensagem = (event) => {
   render() {
     const listaDeMensagens = this.state.mensagens.map((msg) => {
       return (
-          <p>{msg.usuario}:{msg.mensagem}</p>
+        <div>
+          <DivUser>{msg.usuario}:</DivUser>
+          <DivMsg>{msg.mensagem}</DivMsg>
+        </div>
       )
   });
 
   return (
       <DivPai>
           <DivPrincipal>
-            <div>
+            <DivInputs>
+              <InputUsuario placeholder="Usuário" value={this.state.inputDoUsuario} onChange={this.onChangeInputUsuario} />
+              <InputMensagem placeholder="Mensagem" value={this.state.inputDaMensagem} onChange={this.onChangeInputMensagem} />
+              <BotaoEnviar onClick={this.adicionarNovaMensagem}>Enviar</BotaoEnviar>
+            </DivInputs>
+            <DivMensagens>
               {listaDeMensagens}
-            </div>
-            <InputUsuario placeholder="Usuário" value={this.state.inputDoUsuario} onChange={this.onChangeInputUsuario} />
-            <InputMensagem placeholder="Mensagem" value={this.state.inputDaMensagem} onChange={this.onChangeInputMensagem} />
-            <BotaoEnviar onClick={this.adicionarNovaMensagem}>Enviar</BotaoEnviar>
-            
+            </DivMensagens>
           </DivPrincipal>    
       </DivPai>
   )};
